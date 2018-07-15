@@ -1,17 +1,41 @@
 <div class="container">
-  
+    <nav class="navbar navbar-inverse">
+      <div class="container-fluid">
+        <div class="navbar-header">
+          <a class="navbar-brand">Burger Construction Web App</a>
+        </div>
+      </div>
+    </nav>
 
+{{!-- First Major Row --}}
   <div class="row">
-    <div class="col-md-12">
+    
+    {{!-- Begin to break up the application.  Inputs on the far left --}}
+    <div class="col-md-4" align="center">
+      <h4>Make The Burger!</h4>
+     <img src="/assets/img/burger.png" alt="Burger" width="125" height="125">
+      <br>
+      <br>
       <div id="form">
-        Locations:
-        <textarea name="locations" placeholder='Insert Locations Array, e.g., [["Wall World","1","barber","wood frame","2 Floors, 1 Basement Shop","1640"],["Wall World","2","nursing home","reinforced concrete","2 story; main has 3.5","1970, 1998, 2001, 2011"],["Wall World","3","warehouse","Precast tilt up slab in ML","6","2003-2004"]]'
-          rows="5" class="form-control"></textarea>
+        <textarea name="locations" placeholder='Insert Burger and Ingredients'
+          rows="2" class="form-control"></textarea>
         <br>
-        <button type="button" class="btn btn-primary">Search</button>
-        <br>
+        <button type="button" class="btn btn-primary">Submit</button>
         <br>
       </div>
     </div>
-  </div>
+
+      {{!-- Burgers Available to Devour --}}
+      <div class="col-md-4" align="center">
+      <h4>Available Burgers!</h4>
+
+      </div>
+
+      {{!-- Devoured Burgers --}}
+      <div class="col-md-4" align="center">
+      <h4>Devoured Burgers!</h4>
+
+      </div>
+
+  {{!-- End First Major Row --}}
 </div>
