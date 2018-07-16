@@ -1,1 +1,2 @@
-var connection = require("./connection.js");
+// Import MySQL connection.
+var connection = require("../config/connection.js");
