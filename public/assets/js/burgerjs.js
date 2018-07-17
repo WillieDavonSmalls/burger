@@ -1,3 +1,5 @@
+
+
 jQuery(document).ready(function() {
     var form = jQuery('#form');
     form.find('button').on('click', function() {
@@ -21,3 +23,13 @@ jQuery(document).ready(function() {
         // })
     });
 });
+
+// Make sure we wait to attach our handlers until the DOM is fully loaded.
+// $(function() {
+//     $(".change-sleep").on("click", function(event) {
+//       var id = $(this).data("id");
+//       var newSleep = $(this).data("newsleep");
+  
+//       var newSleepState = {
+//         sleepy: newSleep
+//       };
