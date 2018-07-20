@@ -6,6 +6,15 @@ jQuery(document).ready(function() {
         var burgerType = form.find('textarea').val();
         console.log(burgerType);
 
+        $.ajax({
+            method: 'GET',
+            url: '/api/burger_controller',
+            success: function(data) {
+              console.log(data);
+            //   res.send(data);
+            }
+          });
+
         // jQuery.ajax({
         //     type: 'POST',
         //     url: '/api/occupancies',
