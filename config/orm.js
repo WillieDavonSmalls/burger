@@ -5,13 +5,13 @@ var connection = require("../config/connection.js");
 var mysql = require("mysql");
 
 var newBurger;
-var sqlBurgerValues = [[newBurger,'1']];
+var sqlBurgerValues = ['cheese','1'];
 var devoured; 
 
 var orm = {
     devouredSQLfncn: function(cb) {
         var queryString = "SELECT CONCAT(id, '. ', burger_name) burger_name FROM burgers WHERE devoured = 1";
-        connection.query(queryString, function(err, result) {
+        connection.query(queryString, function(error, result) {
             if (error) throw error;
             console.log("Number of records inserted: " + result.affectedRows);
             cb(result);
@@ -33,18 +33,17 @@ var orm = {
         
       },
 
-      InsertBurgerSQLfncn: function([sqlBurgerValues], cb) {
+      InsertBurgerSQLfncn: function([sqlBurgerValues]) {
         var queryString = "INSERT INTO burgers (burger_name, devoured) VALUES ?";
-        connection.query(queryString, [sqlBurgerValues], function(err, result) {
+        connection.query(queryString, [sqlBurgerValues], function(error, result) {
             if (error) throw error;
             console.log("Number of records inserted: " + result.affectedRows);
-            cb(result);
         });
       },
 
       DeleteBurgerSQLfncn: function([sqlBurgerValues], cb) {
         var queryString = "DELETE from burgers WHERE id = ?";
-        connection.query(queryString, [devoured], function(err, result) {
+        connection.query(queryString, [devoured], function(error, result) {
             if (error) throw error;
             console.log("Number of records deleted: " + result.affectedRows);
             cb(result);

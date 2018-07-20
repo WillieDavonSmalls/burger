@@ -16,6 +16,7 @@ router.get("/", function(req, res) {
 router.get("/api/burger_controller", function(req, res) {
 
   burgers.available();
+  burgers.insert();
 
 });
 

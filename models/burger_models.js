@@ -9,9 +9,9 @@ var burgers = {
       });
     },
 
-    insert: function() {
-        orm.InsertBurgerSQLfncn( function(results) {
-          console.log(result);
+    insert: function(newBurger) {
+        orm.InsertBurgerSQLfncn( newBurger, function(results) {
+          console.log(results);
         });
       },
   };
