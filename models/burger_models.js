@@ -1,17 +1,19 @@
 // Import the ORM to create functions that will interact with the database.
 var orm = require("../config/orm.js");
 
-
+var available_burgers = [];
 var burgers = {
-    available: function() {
+    available: function(callback) {
       orm.availableSQLfncn( function(results) {
-        console.log(result);
+        callback(results);
       });
+      // var x = {"hello": "john"}
+      // callback(x);
     },
 
     insert: function(newBurger) {
         orm.InsertBurgerSQLfncn( newBurger, function(results) {
-          console.log(results);
+          // console.log(results);
         });
       },
   };

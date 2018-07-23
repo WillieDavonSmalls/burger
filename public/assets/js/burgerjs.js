@@ -6,14 +6,20 @@ jQuery(document).ready(function() {
         var burgerType = form.find('textarea').val();
         console.log(burgerType);
 
-        $.ajax({
+        jQuery.ajax({
             method: 'GET',
             url: '/api/burger_controller',
-            success: function(data) {
-              console.log(data);
-            //   res.send(data);
-            }
-          });
+            dataType: 'json'
+            // success: function(data) {
+            //     console.log('checking ajax');
+            //     console.log(data);
+
+            // }
+
+          }).then(function(data) {console.log('data'); 
+          console.log(data);
+          return data;
+        });
 
         // jQuery.ajax({
         //     type: 'POST',
@@ -33,12 +39,3 @@ jQuery(document).ready(function() {
     });
 });
 
-// Make sure we wait to attach our handlers until the DOM is fully loaded.
-// $(function() {
-//     $(".change-sleep").on("click", function(event) {
-//       var id = $(this).data("id");
-//       var newSleep = $(this).data("newsleep");
-  
-//       var newSleepState = {
-//         sleepy: newSleep
-//       };

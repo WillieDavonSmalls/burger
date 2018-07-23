@@ -5,8 +5,9 @@ var connection = require("../config/connection.js");
 var mysql = require("mysql");
 
 var newBurger;
-var sqlBurgerValues = ['cheese','1'];
+var sqlBurgerValues = [['cheese','1']];
 var devoured; 
+var available_burgers = [];
 
 var orm = {
     devouredSQLfncn: function(cb) {
@@ -17,21 +18,27 @@ var orm = {
             cb(result);
         });
       },
-
-      availableSQLfncn: function() {
+ 
+      availableSQLfncn: function(callback) {
         var queryString = "SELECT CONCAT(id, '. ', burger_name) burger_name FROM burgers WHERE devoured = 0";  
-        available_burgers = [];
+        
         connection.query(queryString, function(error, result) {
-            if (error) throw error;
+          connection.end();
+            if (error) return callback(error);
         
             for(var i = 0; i<result.length; i++){
               available_burgers.push(result[i].burger_name);
             }
-             console.log(available_burgers);
+            // console.log('available')
+            // console.log(available_burgers);
+            //  return available_burgers;
+            callback(available_burgers);
         });
-        return available_burgers;
-        
+        // console.log(available_burgers);
+        // var x = {"hello": "susan"}
+        // callback(x);
       },
+
 
       InsertBurgerSQLfncn: function([sqlBurgerValues]) {
         var queryString = "INSERT INTO burgers (burger_name, devoured) VALUES ?";
