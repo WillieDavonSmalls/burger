@@ -12,10 +12,8 @@ var burgers = {
     },
 
     insert: function(newBurger) {
-        orm.InsertBurgerSQLfncn( newBurger, function(results) {
-          // console.log(results);
-        });
-      },
+        orm.InsertBurgerSQLfncn( newBurger);
+      }
   };
   
   // Export the database functions for the controller (catsController.js).

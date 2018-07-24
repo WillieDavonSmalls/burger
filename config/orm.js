@@ -5,9 +5,8 @@ var connection = require("../config/connection.js");
 var mysql = require("mysql");
 
 var newBurger;
-var sqlBurgerValues = [['cheese','1']];
 var devoured; 
-var available_burgers = [];
+// var available_burgers = [];
 
 var orm = {
     devouredSQLfncn: function(cb) {
@@ -26,23 +25,25 @@ var orm = {
           connection.end();
             if (error) return callback(error);
         
-            for(var i = 0; i<result.length; i++){
-              available_burgers.push(result[i].burger_name);
-            }
+            // for(var i = 0; i<result.length; i++){
+            //   available_burgers.push(result[i].burger_name);
+            // }
             // console.log('available')
             // console.log(available_burgers);
             //  return available_burgers;
-            callback(available_burgers);
+
+            callback(result);
         });
+
         // console.log(available_burgers);
         // var x = {"hello": "susan"}
         // callback(x);
       },
 
 
-      InsertBurgerSQLfncn: function([sqlBurgerValues]) {
-        var queryString = "INSERT INTO burgers (burger_name, devoured) VALUES ?";
-        connection.query(queryString, [sqlBurgerValues], function(error, result) {
+      InsertBurgerSQLfncn: function(burgerName) {
+        var queryString = "INSERT INTO burgers (burger_name, devoured) VALUES (?,0)";
+        connection.query(queryString, [burgerName], function(error, result) {
             if (error) throw error;
             console.log("Number of records inserted: " + result.affectedRows);
         });

@@ -15,20 +15,21 @@ router.get("/", function(request, result) {
 
 router.get("/api/burger_controller", function(request, result) {
 
-
-  // burgers.available();
-
-  // result.send(burgers.available());
-
   burgers.available(function(devouredBurgers) {
     // wrapper for orm.js that using MySQL query callback will return burger_data, render to index with handlebar
-
     result.send(devouredBurgers);
+  });
 });
 
 
 
+router.post('/api/new_burger', function (request, result) {
+  
+  burgers.insert(request.body.new_burgertype);
+  result.send(request.body);
+
 });
+
 
 // Export routes for server.js to use.
 module.exports = router;

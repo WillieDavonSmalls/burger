@@ -1,41 +1,69 @@
 
 
+// Display devoured burgers
+function buildDevBurgerTable(data) {
+    var html = `<table id="t01">
+        <tr>
+        </tr>
+    `;
+
+    data.forEach(function(data) {
+        html += `
+            <tr>
+                <td>${data.burger_name}</td>
+
+            </tr>
+        `;
+    });
+
+    html += '</table>';
+    return html;
+}
+
+jQuery.ajax({
+    method: 'GET',
+    url: '/api/burger_controller',
+    dataType: 'json',
+    success: function(data){
+        console.log(data);
+        $( "#devBurgers" ).after(buildDevBurgerTable(data));
+    },
+    error: function(e){
+        console.error(e)
+    }
+});
+
+
 jQuery(document).ready(function() {
     var form = jQuery('#form');
     form.find('button').on('click', function() {
         var burgerType = form.find('textarea').val();
-        console.log(burgerType);
+        var payload = {new_burgertype : burgerType};
+
+        console.log('about to send post request', payload);
 
         jQuery.ajax({
-            method: 'GET',
-            url: '/api/burger_controller',
-            dataType: 'json'
-            // success: function(data) {
-            //     console.log('checking ajax');
-            //     console.log(data);
+            type: 'POST',
+            url: '/api/new_burger',
+            data: JSON.stringify(payload),//turn data into JSON string
+            contentType: "application/json; charset=utf-8",
+            success: function() {
+                console.log(results);
+                // jQuery('table').remove();
+                // form.after(buildTable(results))
+                
+                console.log('sending post request', payload);
 
-            // }
-
-          }).then(function(data) {console.log('data'); 
-          console.log(data);
-          return data;
+            },
+            error: function(e) {
+                console.error(e);
+            }
         });
-
-        // jQuery.ajax({
-        //     type: 'POST',
-        //     url: '/api/occupancies',
-        //     dataType: 'json',
-        //     data: locations,
-        //     contentType: "application/json; charset=utf-8",
-        //     success: function(results) {
-        //         // console.log(results);
-        //         jQuery('table').remove();
-        //         form.after(buildTable(results))
-        //     },
-        //     error: function(e) {
-        //         console.error(e);
-        //     }
-        // })
-    });
+});
 });
 
+
+{/* <form class="devour-form button-size">
+<input input type="hidden" class="burger_id" type="text" value={{this.id}}><br>
+<button type="submit" class="btn btn-default">Devour it!</button>
+</form> */}
