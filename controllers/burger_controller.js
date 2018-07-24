@@ -15,12 +15,19 @@ router.get("/", function(request, result) {
 
 router.get("/api/burger_controller", function(request, result) {
 
-  burgers.available(function(devouredBurgers) {
+  burgers.devoured(function(devouredBurgers) {
     // wrapper for orm.js that using MySQL query callback will return burger_data, render to index with handlebar
     result.send(devouredBurgers);
   });
 });
 
+router.get("/api/available", function(request, result) {
+
+  burgers.available(function(availbleBurgers) {
+    // wrapper for orm.js that using MySQL query callback will return burger_data, render to index with handlebar
+    result.send(availbleBurgers);
+  });
+});
 
 
 router.post('/api/new_burger', function (request, result) {

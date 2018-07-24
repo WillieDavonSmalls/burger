@@ -3,6 +3,14 @@ var orm = require("../config/orm.js");
 
 var available_burgers = [];
 var burgers = {
+    devoured: function(callback) {
+      orm.devouredSQLfncn( function(results) {
+        callback(results);
+      });
+      // var x = {"hello": "john"}
+      // callback(x);
+    },
+
     available: function(callback) {
       orm.availableSQLfncn( function(results) {
         callback(results);

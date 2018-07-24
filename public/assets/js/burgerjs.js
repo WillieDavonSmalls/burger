@@ -1,24 +1,29 @@
 
 
-// Display devoured burgers
-function buildDevBurgerTable(data) {
-    var html = `<table id="t01">
-        <tr>
-        </tr>
-    `;
 
-    data.forEach(function(data) {
-        html += `
+
+//function for devoured burgers
+function loadDevouredBurgers(){
+
+    // HTML for Display devoured burgers
+    function buildDevBurgerTable(data) {
+        var html = `<table id="t01">
             <tr>
-                <td>${data.burger_name}</td>
-
             </tr>
         `;
-    });
 
-    html += '</table>';
-    return html;
-}
+        data.forEach(function(data) {
+            html += `
+                <tr>
+                    <td>${data.burger_name}</td>
+
+                </tr>
+            `;
+        });
+
+        html += '</table>';
+        return html;
+    }
 
 jQuery.ajax({
     method: 'GET',
@@ -32,6 +37,19 @@ jQuery.ajax({
         console.error(e)
     }
 });
+};
+
+//Function for building Available Burgers
+function availableBurgersForm(data){
+    html += `
+        <form class="form-inline">
+            <div class="checkbox">
+            <label><input type="hidden" value="1"> Remember me</label> 
+            </div>
+            <button type="submit" class="btn btn-success btn-xs">Eat it Up!</button>
+         </form>`
+}
+
 
 
 jQuery(document).ready(function() {
@@ -48,22 +66,15 @@ jQuery(document).ready(function() {
             data: JSON.stringify(payload),//turn data into JSON string
             contentType: "application/json; charset=utf-8",
             success: function() {
-                console.log(results);
-                // jQuery('table').remove();
-                // form.after(buildTable(results))
-                
                 console.log('sending post request', payload);
-
             },
             error: function(e) {
                 console.error(e);
             }
         });
+
+        //load devoured burgers
+        // loadDevouredBurgers(); 
 });
 });
 
-
-{/* <form class="devour-form button-size">
-<input input type="hidden" class="burger_id" type="text" value={{this.id}}><br>
-<button type="submit" class="btn btn-default">Devour it!</button>
-</form> */}

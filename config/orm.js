@@ -9,13 +9,15 @@ var devoured;
 // var available_burgers = [];
 
 var orm = {
-    devouredSQLfncn: function(cb) {
-        var queryString = "SELECT CONCAT(id, '. ', burger_name) burger_name FROM burgers WHERE devoured = 1";
-        connection.query(queryString, function(error, result) {
-            if (error) throw error;
-            console.log("Number of records inserted: " + result.affectedRows);
-            cb(result);
-        });
+    devouredSQLfncn: function(callback) {
+      var queryString = "SELECT CONCAT(id, '. ', burger_name) burger_name FROM burgers WHERE devoured = 1";  
+      
+      connection.query(queryString, function(error, result) {
+        connection.end();
+          if (error) return callback(error);
+      
+          callback(result);
+      });
       },
  
       availableSQLfncn: function(callback) {
@@ -35,9 +37,9 @@ var orm = {
             callback(result);
         });
 
-        // console.log(available_burgers);
-        // var x = {"hello": "susan"}
-        // callback(x);
+            // console.log(available_burgers);
+            // var x = {"hello": "susan"}
+            // callback(x);
       },
 
 
