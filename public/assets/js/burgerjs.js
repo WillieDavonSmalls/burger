@@ -46,11 +46,11 @@ function buildAvailableBurgersForm(){
         var html;
         data.forEach(function(data) {
             html += `
-                <form class="form-inline">
+                <form class="form-inline" id="eatMe">
                     <div class="checkbox">
                     <label><input type="hidden" value="${data.id}">${data.burger_name}</label> 
                     </div>
-                    <button type="button" class="btn btn-success btn-xs">Eat it Up!</button>
+                    <button type="button" class="btn btn-success btn-xs" id="btnRemoveForm">Eat it Up!</button>
                 </form>`
             });
             return html;
@@ -90,6 +90,10 @@ jQuery(document).ready(function() {
                 console.log('sending post request', payload);
                 buildAvailableBurgersForm();
                 loadDevouredBurgers();
+                $('button#btnRemoveForm').click(function(){
+                    alert('hello');
+                    // $(this).remove();
+                });
             },
             error: function(e) {
                 console.error(e);
@@ -98,6 +102,30 @@ jQuery(document).ready(function() {
 
         //load devoured burgers
         // loadDevouredBurgers(); 
-});
+
+    });
+
+
+    // //***********right here this one does not work.  
+    // $('button#btnRemoveForm.btn.btn-success.btn-xs').click(function(){
+    //     //$(this).closest('form').remove();
+    //     alert('hello');
+    //     // $(this).remove();
+    // });
+
+
 });
 
+$(document).on('click', '#btnRemoveForm', function(){
+    alert("success");
+});
+// $('button#btnRemoveForm.btn.btn-success.btn-xs').on("click", function(){
+//     alert("success");
+//   });
+
+// jQuery(function(){
+//     $('button#btnRemoveForm').click(function(){
+//         alert('hello');
+//         // $(this).remove();
+//     });
+//  });
