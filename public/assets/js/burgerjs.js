@@ -48,7 +48,7 @@ function buildAvailableBurgersForm(){
             html += `
                 <form class="form-inline" id="eatMe">
                     <div class="checkbox">
-                    <label><input type="hidden" value="${data.id}">${data.burger_name}</label> 
+                    <label><input type="hidden" value="${data.id}" name="burger">${data.burger_name}</label> 
                     </div>
                     <button type="button" class="btn btn-success btn-xs" id="btnRemoveForm">Eat it Up!</button>
                 </form>`
@@ -105,27 +105,11 @@ jQuery(document).ready(function() {
 
     });
 
-
-    // //***********right here this one does not work.  
-    // $('button#btnRemoveForm.btn.btn-success.btn-xs').click(function(){
-    //     //$(this).closest('form').remove();
-    //     alert('hello');
-    //     // $(this).remove();
-    // });
-
-
 });
+
 
 $(document).on('click', '#btnRemoveForm', function(){
-    alert("success");
+    var SQLid = $(this).closest("form.form-inline").find("input[name='burger']").val();
+    alert(SQLid);
+    $(this).closest("form.form-inline").remove();
 });
-// $('button#btnRemoveForm.btn.btn-success.btn-xs').on("click", function(){
-//     alert("success");
-//   });
-
-// jQuery(function(){
-//     $('button#btnRemoveForm').click(function(){
-//         alert('hello');
-//         // $(this).remove();
-//     });
-//  });
