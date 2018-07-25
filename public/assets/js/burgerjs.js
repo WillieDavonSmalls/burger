@@ -31,7 +31,7 @@ jQuery.ajax({
     dataType: 'json',
     success: function(data){
         console.log(data);
-        $( "#devBurgers" ).after(buildDevBurgerTable(data));
+        $("#devBurgers").after(buildDevBurgerTable(data));
     },
     error: function(e){
         console.error(e)
@@ -40,7 +40,7 @@ jQuery.ajax({
 };
 
 //Function for building Available Burgers
-function availableBurgersForm(data){
+function buildAvailableBurgersForm(data){
     html += `
         <form class="form-inline">
             <div class="checkbox">
@@ -50,7 +50,18 @@ function availableBurgersForm(data){
          </form>`
 }
 
-
+jQuery.ajax({
+    method: 'GET',
+    url: '/api/available',
+    dataType: 'json',
+    success: function(data){
+        console.log(data);
+        $("#availBurgers").after(buildAvailableBurgersForm(data));
+    },
+    error: function(e){
+        console.error(e)
+    }
+});
 
 jQuery(document).ready(function() {
     var form = jQuery('#form');

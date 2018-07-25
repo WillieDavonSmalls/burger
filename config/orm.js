@@ -21,7 +21,7 @@ var orm = {
       },
  
       availableSQLfncn: function(callback) {
-        var queryString = "SELECT CONCAT(id, '. ', burger_name) burger_name FROM burgers WHERE devoured = 0";  
+        var queryString = "SELECT CONCAT(id, '. ', burger_name) burger_name, id FROM burgers WHERE devoured = 0";  
         
         connection.query(queryString, function(error, result) {
           connection.end();
