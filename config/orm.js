@@ -13,7 +13,7 @@ var orm = {
       var queryString = "SELECT CONCAT(id, '. ', burger_name) burger_name FROM burgers WHERE devoured = 1";  
       
       connection.query(queryString, function(error, result) {
-        connection.end();
+        // connection.end();
           if (error) return callback(error);
       
           callback(result);
@@ -24,7 +24,7 @@ var orm = {
         var queryString = "SELECT CONCAT(id, '. ', burger_name) burger_name, id FROM burgers WHERE devoured = 0";  
         
         connection.query(queryString, function(error, result) {
-          connection.end();
+          // connection.end();
             if (error) return callback(error);
         
             // for(var i = 0; i<result.length; i++){
@@ -46,7 +46,7 @@ var orm = {
       InsertBurgerSQLfncn: function(burgerName) {
         var queryString = "INSERT INTO burgers (burger_name, devoured) VALUES (?,0)";
         connection.query(queryString, [burgerName], function(error, result) {
-          connection.end();
+          // connection.end();
             if (error) throw error;
             console.log("Number of records inserted: " + result.affectedRows);
         });
@@ -55,7 +55,7 @@ var orm = {
       DeleteBurgerSQLfncn: function(burgerID) {
         var queryString = "DELETE from burgers WHERE id = ?";
         connection.query(queryString, [burgerID], function(error, result) {
-          connection.end();
+          // connection.end();
             if (error) throw error;
             console.log("Number of records deleted: " + result.affectedRows);
         });

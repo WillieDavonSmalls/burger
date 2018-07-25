@@ -31,6 +31,7 @@ jQuery.ajax({
     dataType: 'json',
     success: function(data){
         console.log(data);
+        $("#t01").remove();
         $("#devBurgers").after(buildDevBurgerTable(data));
     },
     error: function(e){
@@ -40,28 +41,37 @@ jQuery.ajax({
 };
 
 //Function for building Available Burgers
-function buildAvailableBurgersForm(data){
-    html += `
-        <form class="form-inline">
-            <div class="checkbox">
-            <label><input type="hidden" value="1"> Remember me</label> 
-            </div>
-            <button type="submit" class="btn btn-success btn-xs">Eat it Up!</button>
-         </form>`
-}
+function buildAvailableBurgersForm(){
+    function fillInAvailableBurgerInfo(data){
+        var html;
+        data.forEach(function(data) {
+            html += `
+                <form class="form-inline">
+                    <div class="checkbox">
+                    <label><input type="hidden" value="${data.id}">${data.burger_name}</label> 
+                    </div>
+                    <button type="button" class="btn btn-success btn-xs">Eat it Up!</button>
+                </form>`
+            });
+            return html;
+    };
 
-jQuery.ajax({
-    method: 'GET',
-    url: '/api/available',
-    dataType: 'json',
-    success: function(data){
-        console.log(data);
-        $("#availBurgers").after(buildAvailableBurgersForm(data));
-    },
-    error: function(e){
-        console.error(e)
-    }
-});
+    
+    jQuery.ajax({
+        method: 'GET',
+        url: '/api/available',
+        dataType: 'json',
+        success: function(data){
+            console.log(data);
+            $("#availBurgers").after(fillInAvailableBurgerInfo(data));
+        },
+        error: function(e){
+            console.error(e)
+        }
+    });
+};
+
+
 
 jQuery(document).ready(function() {
     var form = jQuery('#form');
@@ -78,6 +88,8 @@ jQuery(document).ready(function() {
             contentType: "application/json; charset=utf-8",
             success: function() {
                 console.log('sending post request', payload);
+                buildAvailableBurgersForm();
+                loadDevouredBurgers();
             },
             error: function(e) {
                 console.error(e);
