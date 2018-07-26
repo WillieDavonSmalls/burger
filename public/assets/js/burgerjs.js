@@ -72,7 +72,6 @@ function buildAvailableBurgersForm(){
 };
 
 
-
 jQuery(document).ready(function() {
     var form = jQuery('#form');
     form.find('button').on('click', function() {
@@ -89,27 +88,34 @@ jQuery(document).ready(function() {
             success: function() {
                 console.log('sending post request', payload);
                 buildAvailableBurgersForm();
-                loadDevouredBurgers();
-                $('button#btnRemoveForm').click(function(){
-                    alert('hello');
-                    // $(this).remove();
-                });
             },
             error: function(e) {
                 console.error(e);
             }
-        });
-
-        //load devoured burgers
-        // loadDevouredBurgers(); 
+        }); 
 
     });
 
 });
 
-
+//Function that Devours the Burgers and Puts them into the Devoured List
 $(document).on('click', '#btnRemoveForm', function(){
     var SQLid = $(this).closest("form.form-inline").find("input[name='burger']").val();
     alert(SQLid);
     $(this).closest("form.form-inline").remove();
+    var payload = {burgerSQLID : SQLid};
+
+    jQuery.ajax({
+        type: 'POST',
+        url: '/api/devour_burger',
+        data: JSON.stringify(payload),//turn data into JSON string
+        contentType: "application/json; charset=utf-8",
+        success: function() {
+            console.log('sending post request', payload);
+            loadDevouredBurgers();
+        },
+        error: function(e) {
+            console.error(e);
+        }
+    });
 });

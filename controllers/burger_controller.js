@@ -37,6 +37,13 @@ router.post('/api/new_burger', function (request, result) {
 
 });
 
+router.post('/api/devour_burger', function (request, result) {
+  
+  burgers.update(request.body.burgerSQLID);
+  result.send(request.body);
+
+});
+
 
 // Export routes for server.js to use.
 module.exports = router;

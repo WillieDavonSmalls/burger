@@ -42,7 +42,6 @@ var orm = {
             // callback(x);
       },
 
-
       InsertBurgerSQLfncn: function(burgerName) {
         var queryString = "INSERT INTO burgers (burger_name, devoured) VALUES (?,0)";
         connection.query(queryString, [burgerName], function(error, result) {
@@ -52,12 +51,12 @@ var orm = {
         });
       },
 
-      DeleteBurgerSQLfncn: function(burgerID) {
-        var queryString = "DELETE from burgers WHERE id = ?";
+      UpdateBurgerSQLfncn: function(burgerID) {
+        var queryString = "update burgers set devoured = 1 WHERE id = ?";
         connection.query(queryString, [burgerID], function(error, result) {
           // connection.end();
             if (error) throw error;
-            console.log("Number of records deleted: " + result.affectedRows);
+            console.log("Number of records updated: " + result.affectedRows);
         });
       },
 
