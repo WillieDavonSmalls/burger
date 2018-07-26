@@ -1,7 +1,3 @@
-
-
-
-
 //function for devoured burgers
 function loadDevouredBurgers(){
 
