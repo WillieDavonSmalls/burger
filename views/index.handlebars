@@ -16,19 +16,18 @@
      <img src="/assets/img/burger.png" alt="Burger" width="125" height="125">
       <br>
       <br>
-      <div id="form">
-        <textarea name="locations" placeholder='Insert Burger and Ingredients'
+      <div id="inputBurgerForm">
+        <textarea name="burger" placeholder='Insert Burger and Ingredients'
           rows="2" class="form-control"></textarea>
         <br>
-        <button type="button" class="btn btn-primary">Submit</button>
+        <button id = "insertNewBurger" type="button" class="btn btn-primary">Submit</button>
         <br>
       </div>
     </div>
 
       {{!-- Burgers Available to Devour --}}
       <div class="col-md-4" align="center">
-      <h4>Available Burgers!</h4>
-      <div id="availBurgers"></div>
+      <h4 id="availBurgers_h4">Available Burgers!</h4>
       </div>
 
       {{!-- Devoured Burgers --}}
